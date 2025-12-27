@@ -5,3 +5,6 @@ pydantic
 uvicorn
 pymongo[srv]
 pydantic[email]
+gunicorn
+dnspython
+cffi
