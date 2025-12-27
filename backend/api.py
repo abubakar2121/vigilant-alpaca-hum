@@ -120,35 +120,35 @@ async def complete_session(session_id: str, answers: Dict[str, Any] = Body(...))
     except Exception as e:
         raise HTTPException(status_code=500, detail=f"Failed to save report: {e}")
 
-    # Send the report via email
-    email_service = EmailService(
-        smtp_server="smtp.example.com",
-        port=587,
-        sender_email="noreply@example.com",
-        password="your_password"
-    )
-    user = await db.users.find_one({"_id": session["user_id"]})
-    email_body = f"""
-    Hello {user['name']},
+    # # Send the report via email
+    # email_service = EmailService(
+    #     smtp_server="smtp.example.com",
+    #     port=587,
+    #     sender_email="noreply@example.com",
+    #     password="your_password"
+    # )
+    # user = await db.users.find_one({"_id": session["user_id"]})
+    # email_body = f"""
+    # Hello {user['name']},
 
-    Here is your personalized report:
+    # Here is your personalized report:
 
-    Top Mindset Shift: {report.mindset_shift}
-    Insight: {report.mindset_shift_insight}
+    # Top Mindset Shift: {report.mindset_shift}
+    # Insight: {report.mindset_shift_insight}
 
-    Top Operational Focus: {report.operational_focus}
-    Insight: {report.operational_focus_insight}
+    # Top Operational Focus: {report.operational_focus}
+    # Insight: {report.operational_focus_insight}
 
-    Suggested Next Move: {report.next_move['type']} - {report.next_move['description']}
-    Details: {report.next_move['details']}
+    # Suggested Next Move: {report.next_move['type']} - {report.next_move['description']}
+    # Details: {report.next_move['details']}
 
-    Thank you for using the Founder Clarity Compass!
-    """
-    email_service.send_email(
-        receiver_email=user["email"],
-        subject="Your Founder Clarity Compass Report",
-        body=email_body
-    )
+    # Thank you for using the Founder Clarity Compass!
+    # """
+    # email_service.send_email(
+    #     receiver_email=user["email"],
+    #     subject="Your Founder Clarity Compass Report",
+    #     body=email_body
+    # )
 
     # The report object now includes the auto-generated _id
     return {"report": json.loads(report.model_dump_json())}
