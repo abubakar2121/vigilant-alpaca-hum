@@ -9,15 +9,7 @@ export default defineConfig(() => ({
     port: 5137,
     allowedHosts: ["founder-clarity-compass-frontend.onrender.com", "localhost"],
   },
-  plugins: [
-    dyadComponentTagger(),
-    react({
-      jsxImportSource: "@emotion/react",
-    }),
-  ],
-  esbuild: {
-    jsxImportSource: "@emotion/react",
-  },
+  plugins: [dyadComponentTagger(), react()],
   resolve: {
     alias: {
       "@": path.resolve(__dirname, "./src"),
