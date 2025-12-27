@@ -1,3 +1,4 @@
+import os
 from fastapi import APIRouter, HTTPException, Body
 from pydantic import BaseModel
 from models import User, Session, Report
@@ -13,7 +14,12 @@ router = APIRouter(prefix="/api/v1")
 
 # Mock questions - will be replaced with a proper question loader
 def get_questions_for_company_size(company_size: str):
-    with open('frontend/src/data/questions.json', 'r') as f:
+    # Construct an absolute path to the questions.json file
+    script_dir = os.path.dirname(__file__)  # Get the directory where the script is located
+    # Go up one level to the root, then into frontend/src/data
+    questions_path = os.path.join(script_dir, '..', 'frontend', 'src', 'data', 'questions.json')
+    
+    with open(questions_path, 'r') as f:
         all_questions = json.load(f)
 
     return [q for q in all_questions if company_size in q['stage_applicability']]
