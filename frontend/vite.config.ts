@@ -7,6 +7,7 @@ export default defineConfig(() => ({
   server: {
     host: "::",
     port: 5137,
+    allowedHosts: ["founder-clarity-compass-frontend.onrender.com", "localhost"],
   },
   plugins: [dyadComponentTagger(), react()],
   resolve: {
