@@ -8,6 +8,7 @@ import { useForm } from "react-hook-form";
 import { useNavigate } from "react-router-dom";
 import { z } from "zod";
 import { toast } from "sonner"; // Using sonner for toasts
+import API_URL from "@/config";
 
 // Define the form schema using Zod
 const formSchema = z.object({
@@ -32,8 +33,7 @@ const OnboardingPage = () => {
 
   const onSubmit = async (values: z.infer<typeof formSchema>) => {
     try {
-      const apiUrl = import.meta.env.VITE_API_BASE_URL || "http://localhost:8000";
-      const response = await fetch(`${apiUrl}/api/v1/session/start`, {
+      const response = await fetch(`${API_URL}/api/v1/session/start`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",

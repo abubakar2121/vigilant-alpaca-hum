@@ -10,6 +10,7 @@ import { Label } from "@/components/ui/label";
 import { trackEvent } from "@/utils/tracking-mock";
 import { toast } from "sonner";
 import { Progress } from "@/components/ui/progress";
+import API_URL from "@/config";
 
 const DiagnosticPage = () => {
   const navigate = useNavigate();
@@ -84,8 +85,7 @@ const DiagnosticPage = () => {
       if (!user || !sessionId) return;
 
       try {
-        const apiUrl = import.meta.env.VITE_API_BASE_URL || "http://localhost:8000";
-        const response = await fetch(`${apiUrl}/api/v1/session/${sessionId}/complete`, {
+        const response = await fetch(`${API_URL}/api/v1/session/${sessionId}/complete`, {
           method: 'POST',
           headers: {
             'Content-Type': 'application/json',
